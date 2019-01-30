@@ -1,7 +1,12 @@
 package br.com.warnit.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Guilherme Camargo
@@ -16,9 +21,13 @@ public class Bairro implements Serializable{
 	private Long id;
 	@Column(length = 25, nullable = false)
 	private String nome;
+	@JsonManagedReference
 	@ManyToOne(optional=false, cascade= {CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;
+	@JsonBackReference
+	@OneToMany
+	private List<Rua> ruas = new ArrayList<>();
 	
 	public Bairro(Long id, String nome, Cidade cidade) {
 		super();

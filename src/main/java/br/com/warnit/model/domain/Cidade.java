@@ -1,6 +1,11 @@
 package br.com.warnit.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -16,8 +21,12 @@ public class Cidade implements Serializable{
 	private Long id;
 	@Column(length = 25, nullable = false)
 	private String nome;
+	@JsonManagedReference
 	@ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
 	private Estado estado;
+	@JsonBackReference
+	@OneToMany
+	private List<Bairro> bairros = new ArrayList<>();
 	
 	public Cidade(Long id, String nome, Estado estado) {
 		super();
@@ -79,5 +88,13 @@ public class Cidade implements Serializable{
 	}
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	public List<Bairro> getBairros() {
+		return bairros;
+	}
+
+	public void setBairros(List<Bairro> bairros) {
+		this.bairros = bairros;
 	}
 }

@@ -1,9 +1,12 @@
 package br.com.warnit.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,6 +28,9 @@ public class Rua implements Serializable {
     private Bairro bairro;
     @Column(length=8, nullable=false)
     private String cep;
+    @JsonBackReference
+    @OneToMany
+    private List<Logradouro> logradouros = new ArrayList<>();
 
     public Rua(String nomeRua, Bairro bairro, String cep) {
         this.nomeRua = nomeRua;

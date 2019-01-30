@@ -1,5 +1,7 @@
 package br.com.warnit.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,6 +17,7 @@ public class Logradouro implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@JsonManagedReference
 	@ManyToOne(optional=false, cascade= {CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "rua_id")
 	private Rua rua;

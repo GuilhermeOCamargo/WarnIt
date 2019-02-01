@@ -28,15 +28,11 @@ public class Cidade implements Serializable{
 	@OneToMany
 	private List<Bairro> bairros = new ArrayList<>();
 	
-	public Cidade(Long id, String nome, Estado estado) {
-		super();
-		this.id = id;
+	public Cidade(String nome, Estado estado) {
 		this.nome = nome;
 		this.estado = estado;
 	}
 	public Cidade() {}
-	
-	
 	
 	@Override
 	public int hashCode() {

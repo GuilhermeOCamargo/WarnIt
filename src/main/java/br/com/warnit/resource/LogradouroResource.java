@@ -1,5 +1,6 @@
 package br.com.warnit.resource;
 
+import br.com.warnit.model.ResponseDto.LogradouroResponseDTO;
 import br.com.warnit.model.domain.Logradouro;
 import br.com.warnit.service.LogradouroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,6 @@ public class LogradouroResource {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> findById(@PathVariable Long id){
         Logradouro logradouro = logradouroService.findById(id);
-        return ResponseEntity.ok(logradouro);
+        return ResponseEntity.ok(LogradouroResponseDTO.getDto(logradouro));
     }
 }

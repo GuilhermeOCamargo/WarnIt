@@ -26,9 +26,7 @@ public class Logradouro implements Serializable{
 	@Column(length = 25, nullable = true)
 	private String complemento;
 	
-	public Logradouro(Long id, Rua rua, String numero, Bairro bairro, String complemento, String cep) {
-		super();
-		this.id = id;
+	public Logradouro(Rua rua, String numero, String complemento) {
 		this.rua = rua;
 		this.numero = numero;
 		this.complemento = complemento;

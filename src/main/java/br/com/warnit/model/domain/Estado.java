@@ -27,12 +27,10 @@ public class Estado implements Serializable {
     @OneToMany
     private List<Cidade> cidades = new ArrayList<>();
 
-    public Estado(Long id, String nomeEstado, String uf) {
-        this.id = id;
+    public Estado(String nomeEstado, String uf) {
         this.nomeEstado = nomeEstado;
         this.uf = uf;
     }
-
     public Estado() {}
 
     @Override

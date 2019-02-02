@@ -1,7 +1,7 @@
 package br.com.warnit.resource;
 
 import br.com.warnit.model.domain.Logradouro;
-import br.com.warnit.model.dtos.newDto.LogradouroDTO;
+import br.com.warnit.model.dto.LogradouroDTO;
 import br.com.warnit.service.LogradouroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

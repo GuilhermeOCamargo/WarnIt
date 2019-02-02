@@ -7,7 +7,7 @@ import br.com.warnit.model.domain.Cidade;
  * @since 29/01/2019
  * @version 1.0
  *
- * This Class creates a standard Cidade object to tests
+ * This Class creates a standard {@link Cidade} object to tests
  * */
 public class CidadeBuilder {
 

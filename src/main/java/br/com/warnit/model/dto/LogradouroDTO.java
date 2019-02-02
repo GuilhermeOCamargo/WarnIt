@@ -1,4 +1,4 @@
-package br.com.warnit.model.dtos.newDto;
+package br.com.warnit.model.dto;
 
 import br.com.warnit.model.domain.Logradouro;
 

@@ -7,7 +7,7 @@ import br.com.warnit.model.domain.Logradouro;
  * @since 29/01/2019
  * @version 1.0
  *
- * This Class creates a standard Logradouro object to tests
+ * This Class creates a standard {@link Logradouro} object to tests
  * */
 public class LogradouroBuilder {
 

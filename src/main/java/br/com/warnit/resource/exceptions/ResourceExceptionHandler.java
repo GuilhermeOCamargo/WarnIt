@@ -1,5 +1,6 @@
 package br.com.warnit.resource.exceptions;
 
+import br.com.warnit.service.exceptions.AuthenticationFailedException;
 import br.com.warnit.service.exceptions.DataIntegrityException;
 import br.com.warnit.service.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class ResourceExceptionHandler {
     /**
      * @param e - Exception that must be handled
      * @param req - HttpServletRequest
-     * @return Default json error to handle ObjectNotFoundException
+     * @return Default json error to handle {@link ObjectNotFoundException}
      * */
     @ExceptionHandler(ObjectNotFoundException.class)
     public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest req){
@@ -28,11 +29,21 @@ public class ResourceExceptionHandler {
     /**
      * @param e - Exception that must be handled
      * @param req - HttpServletRequest
-     * @return Default json error to handle DataIntegrityException
+     * @return Default json error to handle {@link DataIntegrityException}
      * */
     @ExceptionHandler(DataIntegrityException.class)
     public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest req){
         StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+    /**
+     * @param e - Exception that must be handled
+     * @param req - HttpServletRequest
+     * @return Default json error to handle {@link AuthenticationFailedException}
+     * */
+    @ExceptionHandler(AuthenticationFailedException.class)
+    public ResponseEntity<StandardError> dataIntegrity(AuthenticationFailedException e, HttpServletRequest req){
+        StandardError err = new StandardError(HttpStatus.UNAUTHORIZED.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err);
     }
 }

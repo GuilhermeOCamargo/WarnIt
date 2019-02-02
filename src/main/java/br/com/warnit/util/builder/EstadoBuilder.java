@@ -7,7 +7,7 @@ import br.com.warnit.model.domain.Estado;
  * @since 29/01/2019
  * @version 1.0
  *
- * This Class creates a standard Estado object to tests
+ * This Class creates a standard {@link Estado} object to tests
  * */
 public class EstadoBuilder {
     private Estado estado;

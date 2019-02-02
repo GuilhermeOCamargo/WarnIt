@@ -26,7 +26,7 @@ public class Rua implements Serializable {
     @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "bairro_id", nullable = false)
     private Bairro bairro;
-    @Column(length=8, nullable=false)
+    @Column(length=8, nullable=false, unique = true)
     private String cep;
     @JsonBackReference
     @OneToMany

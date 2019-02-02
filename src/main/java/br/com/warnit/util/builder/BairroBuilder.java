@@ -7,7 +7,7 @@ import br.com.warnit.model.domain.Bairro;
  * @since 29/01/2019
  * @version 1.0
  *
- * This Class creates a standard Bairro object to tests
+ * This Class creates a standard {@link Bairro} object to tests
  * */
 public class BairroBuilder {
 

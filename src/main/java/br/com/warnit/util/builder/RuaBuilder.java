@@ -7,7 +7,7 @@ import br.com.warnit.model.domain.Rua;
  * @since 29/01/2019
  * @version 1.0
  *
- * This Class creates a standard Rua object to tests
+ * This Class creates a standard {@link Rua} object to tests
  * */
 public class RuaBuilder {
 

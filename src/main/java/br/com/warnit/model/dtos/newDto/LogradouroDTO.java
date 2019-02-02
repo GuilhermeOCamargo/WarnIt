@@ -1,5 +1,7 @@
 package br.com.warnit.model.dtos.newDto;
 
+import br.com.warnit.model.domain.Logradouro;
+
 import java.io.Serializable;
 
 /**
@@ -42,6 +44,21 @@ public class LogradouroDTO implements Serializable{
         this.idEstado = idEstado;
         this.nomeEstado = nomeEstado;
         this.uf = uf;
+    }
+    public LogradouroDTO(Logradouro log){
+        this.idLogradouro = log.getId();
+        this.numero = log.getNumero();
+        this.complemento = this.getComplemento();
+        this.idRua = log.getRua().getId();
+        this.nomeRua = log.getRua().getNomeRua();
+        this.cep = log.getRua().getCep();
+        this.idBairro = log.getRua().getBairro().getId();
+        this.nomeBairro = log.getRua().getBairro().getNome();
+        this.idCidade = log.getRua().getBairro().getCidade().getId();
+        this.nomeCidade = log.getRua().getBairro().getCidade().getNome();
+        this.idEstado = log.getRua().getBairro().getCidade().getEstado().getId();
+        this.nomeEstado = log.getRua().getBairro().getCidade().getEstado().getNomeEstado();
+        this.uf = log.getRua().getBairro().getCidade().getEstado().getUf();
     }
 
     public Long getIdLogradouro() {

@@ -55,7 +55,11 @@ public class LogradouroService {
         }
     }
 
-
+    /**
+     * Convert a {@link LogradouroDTO} in a {@link Logradouro}
+     * @param dto
+     * @return Logradouro
+     * */
     public Logradouro fromDto(LogradouroDTO dto){
         Rua rua = null;
         Estado estado;
@@ -78,5 +82,4 @@ public class LogradouroService {
         Logradouro logradouro = new Logradouro(dto.getIdLogradouro(), rua, dto.getNumero(), dto.getComplemento());
         return logradouro;
     }
-
 }

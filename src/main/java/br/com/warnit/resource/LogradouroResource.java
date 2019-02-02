@@ -1,6 +1,5 @@
 package br.com.warnit.resource;
 
-import br.com.warnit.model.dtos.ResponseDto.LogradouroResponseDTO;
 import br.com.warnit.model.domain.Logradouro;
 import br.com.warnit.model.dtos.newDto.LogradouroDTO;
 import br.com.warnit.service.LogradouroService;
@@ -25,9 +24,9 @@ public class LogradouroResource {
     private LogradouroService logradouroService;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<LogradouroResponseDTO> findById(@PathVariable Long id){
+    public ResponseEntity<LogradouroDTO> findById(@PathVariable Long id){
         Logradouro logradouro = logradouroService.findById(id);
-        return ResponseEntity.ok(LogradouroResponseDTO.getDto(logradouro));
+        return ResponseEntity.ok(new LogradouroDTO(logradouro));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)

@@ -1,29 +1,33 @@
-package br.com.warnit.model.dto;
+package br.com.warnit.model.dtos.ResponseDto;
 
-import br.com.warnit.model.DtoInterface;
 import br.com.warnit.model.domain.Estado;
 
 import java.io.Serializable;
-
 /**
  * @author Guilherme Camargo
  * @since 31/01/2019
  * @version 1.0
  * */
-public class EstadoDTO implements Serializable, DtoInterface<Estado> {
+public class EstadoResponseDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
+    private Long id;
     private String nomeEstado;
     private String uf;
 
-    public EstadoDTO(String nomeEstado, String uf) {
+    public EstadoResponseDTO(Long id, String nomeEstado, String uf) {
+        this.id = id;
         this.nomeEstado = nomeEstado;
         this.uf = uf;
     }
+    public EstadoResponseDTO(){}
 
-    @Override
-    public Estado getObject(){
-        return new Estado(nomeEstado, uf);
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNomeEstado() {
@@ -40,5 +44,9 @@ public class EstadoDTO implements Serializable, DtoInterface<Estado> {
 
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    public static EstadoResponseDTO getDto(Estado object) {
+        return new EstadoResponseDTO(object.getId(), object.getNomeEstado(), object.getUf());
     }
 }

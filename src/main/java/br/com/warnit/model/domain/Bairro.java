@@ -29,7 +29,8 @@ public class Bairro implements Serializable{
 	@OneToMany
 	private List<Rua> ruas = new ArrayList<>();
 	
-	public Bairro(String nome, Cidade cidade) {
+	public Bairro(Long id, String nome, Cidade cidade) {
+		this.id = id;
 		this.nome = nome;
 		this.cidade = cidade;
 	}

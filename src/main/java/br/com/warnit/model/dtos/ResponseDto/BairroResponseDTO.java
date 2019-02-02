@@ -1,4 +1,4 @@
-package br.com.warnit.model.ResponseDto;
+package br.com.warnit.model.dtos.ResponseDto;
 
 import br.com.warnit.model.domain.Bairro;
 

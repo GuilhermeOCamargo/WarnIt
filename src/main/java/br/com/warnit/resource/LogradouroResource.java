@@ -1,15 +1,17 @@
 package br.com.warnit.resource;
 
-import br.com.warnit.model.ResponseDto.LogradouroResponseDTO;
+import br.com.warnit.model.dtos.ResponseDto.LogradouroResponseDTO;
 import br.com.warnit.model.domain.Logradouro;
+import br.com.warnit.model.dtos.newDto.LogradouroDTO;
 import br.com.warnit.service.LogradouroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+
 /**
  * @author Guilherme Camargo
  * @since 29/01/2019
@@ -23,8 +25,30 @@ public class LogradouroResource {
     private LogradouroService logradouroService;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> findById(@PathVariable Long id){
+    public ResponseEntity<LogradouroResponseDTO> findById(@PathVariable Long id){
         Logradouro logradouro = logradouroService.findById(id);
         return ResponseEntity.ok(LogradouroResponseDTO.getDto(logradouro));
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Void> insert(@RequestBody LogradouroDTO logradouroDTO){
+        Logradouro logradouro = logradouroService.insert(logradouroService.fromDto(logradouroDTO));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(logradouro.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody LogradouroDTO logradouroDTO){
+        Logradouro logradouro = logradouroService.fromDto(logradouroDTO);
+        logradouro.setId(id);
+        logradouroService.update(logradouro);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        logradouroService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

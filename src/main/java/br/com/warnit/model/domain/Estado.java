@@ -27,7 +27,8 @@ public class Estado implements Serializable {
     @OneToMany
     private List<Cidade> cidades = new ArrayList<>();
 
-    public Estado(String nomeEstado, String uf) {
+    public Estado(Long id, String nomeEstado, String uf) {
+        this.id = id;
         this.nomeEstado = nomeEstado;
         this.uf = uf;
     }

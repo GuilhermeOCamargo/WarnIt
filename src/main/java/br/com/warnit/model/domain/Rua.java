@@ -32,7 +32,8 @@ public class Rua implements Serializable {
     @OneToMany
     private List<Logradouro> logradouros = new ArrayList<>();
 
-    public Rua(String nomeRua, Bairro bairro, String cep) {
+    public Rua(Long id, String nomeRua, Bairro bairro, String cep) {
+        this.id = id;
         this.nomeRua = nomeRua;
         this.bairro = bairro;
         this.cep = cep;

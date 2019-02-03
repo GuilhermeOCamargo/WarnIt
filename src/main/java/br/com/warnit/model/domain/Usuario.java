@@ -3,7 +3,6 @@ package br.com.warnit.model.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.logging.Level;
 
 /**
  * @author Guilherme Camargo

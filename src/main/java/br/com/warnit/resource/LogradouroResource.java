@@ -31,7 +31,7 @@ public class LogradouroResource {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<Void> insert(@RequestBody LogradouroDTO logradouroDTO){
-        Logradouro logradouro = logradouroService.insert(logradouroService.fromDto(logradouroDTO));
+        Logradouro logradouro = logradouroService.save(logradouroService.fromDto(logradouroDTO));
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(logradouro.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -41,7 +41,7 @@ public class LogradouroResource {
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody LogradouroDTO logradouroDTO){
         Logradouro logradouro = logradouroService.fromDto(logradouroDTO);
         logradouro.setId(id);
-        logradouroService.update(logradouro);
+        logradouroService.save(logradouro);
         return ResponseEntity.noContent().build();
     }
 

@@ -37,12 +37,7 @@ public class LogradouroService {
     }
 
     @Transactional
-    public Logradouro insert(Logradouro logradouro){
-        return logradouroRepository.save(logradouro);
-    }
-
-    @Transactional
-    public Logradouro update(Logradouro logradouro){
+    public Logradouro save(Logradouro logradouro){
         return logradouroRepository.save(logradouro);
     }
 

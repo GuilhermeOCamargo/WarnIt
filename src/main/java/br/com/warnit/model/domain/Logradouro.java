@@ -1,5 +1,6 @@
 package br.com.warnit.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -25,6 +26,10 @@ public class Logradouro implements Serializable{
 	private String numero;
 	@Column(length = 25, nullable = true)
 	private String complemento;
+	@JsonBackReference
+	@OneToOne(mappedBy = "logradouro")
+	@JoinColumn(nullable = false)
+	private Usuario usuario;
 	
 	public Logradouro(Long id, Rua rua, String numero, String complemento) {
 		this.id = id;
@@ -67,12 +72,18 @@ public class Logradouro implements Serializable{
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-
 	public Rua getRua() {
 		return rua;
 	}
-
 	public void setRua(Rua rua) {
 		this.rua = rua;
 	}
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

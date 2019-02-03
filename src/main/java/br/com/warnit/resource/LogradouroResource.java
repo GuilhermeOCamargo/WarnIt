@@ -39,8 +39,8 @@ public class LogradouroResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody LogradouroDTO logradouroDTO){
+        logradouroDTO.setIdLogradouro(id);
         Logradouro logradouro = logradouroService.fromDto(logradouroDTO);
-        logradouro.setId(id);
         logradouroService.save(logradouro);
         return ResponseEntity.noContent().build();
     }

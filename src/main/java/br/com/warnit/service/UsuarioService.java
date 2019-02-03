@@ -43,13 +43,19 @@ public class UsuarioService {
         }
     }
 
+    public void updatePassword(UsuarioDTO dto){
+        Usuario usuario = findById(dto.getId());
+        usuario.setSenha(dto.getSenha());
+        save(usuario);
+    }
+
      /** Convert a {@link UsuarioDTO} in a {@link Usuario}
      * @param dto
      * @return Usuario
      * */
     public Usuario fromDto(UsuarioDTO dto){
         Usuario usuario;
-        if(dto.getSenha() == null){
+        if(dto.getId() != null){
             usuario = findById(dto.getId());
             usuario.setEmail(dto.getEmail());
             usuario.setNome(dto.getNome());

@@ -29,8 +29,11 @@ public class LogradouroDTO implements Serializable{
     private Long idEstado;
     private String nomeEstado;
     private String uf;
-
-    public LogradouroDTO(Long idLogradouro, String numero, String complemento, Long idRua, String nomeRua, String cep, Long idBairro, String nomeBairro, Long idCidade, String nomeCidade, Long idEstado, String nomeEstado, String uf) {
+    /*Usuario*/
+    private Long usuarioId;
+    public LogradouroDTO(Long idLogradouro, String numero, String complemento, Long idRua, String nomeRua,
+                         String cep, Long idBairro, String nomeBairro, Long idCidade, String nomeCidade,
+                         Long idEstado, String nomeEstado, String uf, Long usuarioId) {
         this.idLogradouro = idLogradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -44,6 +47,7 @@ public class LogradouroDTO implements Serializable{
         this.idEstado = idEstado;
         this.nomeEstado = nomeEstado;
         this.uf = uf;
+        this.usuarioId = usuarioId;
     }
     public LogradouroDTO(Logradouro log){
         this.idLogradouro = log.getId();
@@ -163,5 +167,13 @@ public class LogradouroDTO implements Serializable{
 
     public void setIdEstado(Long idEstado) {
         this.idEstado = idEstado;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }

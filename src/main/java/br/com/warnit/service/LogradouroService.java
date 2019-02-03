@@ -29,6 +29,8 @@ public class LogradouroService {
     private BairroService bairroService;
     @Autowired
     private CidadeService cidadeService;
+    @Autowired
+    private UsuarioService usuarioService;
 
     public Logradouro findById(Long id){
         Optional<Logradouro> logradouro = logradouroRepository.findById(id);
@@ -38,6 +40,7 @@ public class LogradouroService {
 
     @Transactional
     public Logradouro save(Logradouro logradouro){
+        usuarioService.save(logradouro.getUsuario());
         return logradouroRepository.save(logradouro);
     }
 
@@ -60,6 +63,7 @@ public class LogradouroService {
         Estado estado;
         Cidade cidade;
         Bairro bairro;
+        Logradouro logradouro;
         boolean isRuaPersisted = true;
         try{
             rua = ruaService.findByCep(dto.getCep());
@@ -74,7 +78,16 @@ public class LogradouroService {
             bairro.setCidade(cidade);
             rua = new Rua(dto.getIdRua(), dto.getNomeRua(), bairro, dto.getCep());
         }
-        Logradouro logradouro = new Logradouro(dto.getIdLogradouro(), rua, dto.getNumero(), dto.getComplemento());
+        if(dto.getIdLogradouro() != null){
+            logradouro = findById(dto.getIdLogradouro());
+            logradouro.setRua(rua);
+            logradouro.setNumero(dto.getNumero());
+            logradouro.setComplemento(dto.getComplemento());
+        }else{
+            logradouro = new Logradouro(dto.getIdLogradouro(), rua, dto.getNumero(), dto.getComplemento());
+            logradouro.setUsuario(usuarioService.findById(dto.getUsuarioId()));
+            logradouro.getUsuario().setLogradouro(logradouro);
+        }
         return logradouro;
     }
 }

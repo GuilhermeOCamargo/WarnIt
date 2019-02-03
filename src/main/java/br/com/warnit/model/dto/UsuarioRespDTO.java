@@ -9,27 +9,22 @@ import java.io.Serializable;
  * @since 03/02/2019
  * @version 1.0
  * */
-public class UsuarioDTO implements Serializable {
+public class UsuarioRespDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
     private String nome;
     private String email;
-    private String senha;
-    private String confirmSenha;
 
-    public UsuarioDTO(Long id, String nome, String email, String senha) {
+    public UsuarioRespDTO(Long id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.senha = senha;
     }
-    public UsuarioDTO(){}
-
-    public UsuarioDTO(Usuario user){
-        this.id = user.getId();
-        this.nome = user.getNome();
-        this.email = user.getEmail();
+    public UsuarioRespDTO(Usuario usuario){
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
     }
 
     public Long getId() {
@@ -54,21 +49,5 @@ public class UsuarioDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getConfirmSenha() {
-        return confirmSenha;
-    }
-
-    public void setConfirmSenha(String confirmSenha) {
-        this.confirmSenha = confirmSenha;
     }
 }

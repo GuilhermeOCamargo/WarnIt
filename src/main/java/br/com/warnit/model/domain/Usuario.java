@@ -1,5 +1,7 @@
 package br.com.warnit.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -21,7 +23,8 @@ public class Usuario implements Serializable {
     private String email;
     @Column(length = 15, nullable = false)
     private String senha;
-    @OneToOne(optional = true, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @OneToOne(optional = true, orphanRemoval = true)
     @JoinColumn(nullable = true, unique = true)
     private Logradouro logradouro;
 

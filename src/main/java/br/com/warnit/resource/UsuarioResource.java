@@ -3,6 +3,7 @@ package br.com.warnit.resource;
 import br.com.warnit.model.domain.Usuario;
 import br.com.warnit.model.dto.UsuarioDTO;
 import br.com.warnit.model.dto.UsuarioLoginDTO;
+import br.com.warnit.model.dto.UsuarioRespDTO;
 import br.com.warnit.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,15 +21,16 @@ public class UsuarioResource {
     private UsuarioService usuarioService;
 
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<UsuarioDTO> authenticate(@RequestBody UsuarioLoginDTO dto){
+    public ResponseEntity<Usuario> authenticate(@RequestBody UsuarioLoginDTO dto){
         Usuario usuario = usuarioService.authenticate(dto.getEmail(), dto.getSenha());
-        return ResponseEntity.ok(new UsuarioDTO(usuario));
+//        return ResponseEntity.ok(new UsuarioRespDTO(usuario));
+        return ResponseEntity.ok(usuario);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<UsuarioDTO> findById(@PathVariable Long id){
+    public ResponseEntity<UsuarioRespDTO> findById(@PathVariable Long id){
         Usuario usuario= usuarioService.findById(id);
-        return ResponseEntity.ok(new UsuarioDTO(usuario));
+        return ResponseEntity.ok(new UsuarioRespDTO(usuario));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -44,6 +46,13 @@ public class UsuarioResource {
         Usuario usuario = usuarioService.fromDto(usuarioDto);
         usuario.setId(id);
         usuarioService.save(usuario);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/password/{id}")
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO){
+        usuarioDTO.setId(id);
+        usuarioService.updatePassword(usuarioDTO);
         return ResponseEntity.noContent().build();
     }
 

@@ -34,6 +34,12 @@ public class UsuarioService {
                 " Tipo: "+ Usuario.class.getSimpleName()));
     }
 
+    public Usuario findByEmail(String email){
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        return usuario.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado. Email: "+email+
+                " Tipo: "+ Usuario.class.getSimpleName()));
+    }
+
     @Transactional
     public Usuario save(Usuario usuario){
         try{

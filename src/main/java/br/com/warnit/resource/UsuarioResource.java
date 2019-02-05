@@ -3,7 +3,7 @@ package br.com.warnit.resource;
 import br.com.warnit.model.domain.Usuario;
 import br.com.warnit.model.dto.UsuarioDTO;
 import br.com.warnit.model.dto.UsuarioLoginDTO;
-import br.com.warnit.model.dto.UsuarioRespDTO;
+import br.com.warnit.model.vo.UsuarioVO;
 import br.com.warnit.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,8 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
-
+/**
+ * @author Guilherme Camargo
+ * @since 02/02/2019
+ * @version 1.0
+ * */
 @RestController
 @RequestMapping(value = "/usuarios")
 public class UsuarioResource {
@@ -21,20 +26,19 @@ public class UsuarioResource {
     private UsuarioService usuarioService;
 
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Usuario> authenticate(@RequestBody UsuarioLoginDTO dto){
+    public ResponseEntity<UsuarioVO> authenticate(@RequestBody UsuarioLoginDTO dto){
         Usuario usuario = usuarioService.authenticate(dto.getEmail(), dto.getSenha());
-//        return ResponseEntity.ok(new UsuarioRespDTO(usuario));
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.ok(new UsuarioVO(usuario));
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<UsuarioRespDTO> findById(@PathVariable Long id){
+    public ResponseEntity<UsuarioVO> findById(@PathVariable Long id){
         Usuario usuario= usuarioService.findById(id);
-        return ResponseEntity.ok(new UsuarioRespDTO(usuario));
+        return ResponseEntity.ok(new UsuarioVO(usuario));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Void> insert(@RequestBody UsuarioDTO usuarioDTO){
+    public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioDTO usuarioDTO){
         Usuario usuario = usuarioService.save(usuarioService.fromDto(usuarioDTO));
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(usuario.getId()).toUri();

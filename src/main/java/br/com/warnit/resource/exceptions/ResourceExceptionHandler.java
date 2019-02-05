@@ -3,8 +3,11 @@ package br.com.warnit.resource.exceptions;
 import br.com.warnit.service.exceptions.AuthenticationFailedException;
 import br.com.warnit.service.exceptions.DataIntegrityException;
 import br.com.warnit.service.exceptions.ObjectNotFoundException;
+import br.com.warnit.service.exceptions.ValidationError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -45,5 +48,20 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> dataIntegrity(AuthenticationFailedException e, HttpServletRequest req){
         StandardError err = new StandardError(HttpStatus.UNAUTHORIZED.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err);
+    }
+    /**
+     * @param e - Exception that must be handled
+     * @param req - HttpServletRequest
+     * @return Default json error to handle {@link MethodArgumentNotValidException}
+     * */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardError> methodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest req){
+        ValidationError err = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de Validação.", System.currentTimeMillis());
+
+        for(FieldError fe : e.getBindingResult().getFieldErrors()){
+            err.addError(fe.getField(), fe.getDefaultMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 }

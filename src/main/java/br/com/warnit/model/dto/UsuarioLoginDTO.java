@@ -1,5 +1,8 @@
 package br.com.warnit.model.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -10,7 +13,10 @@ import java.io.Serializable;
 public class UsuarioLoginDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Email(message = "Insira um e-mail válido.")
+    @NotNull(message = "Insira o e-mail.")
     private String email;
+    @NotNull(message = "Insira a senha.")
     private String senha;
 
     public UsuarioLoginDTO(String email, String senha) {

@@ -3,6 +3,7 @@ package br.com.warnit.service;
 import br.com.warnit.model.domain.*;
 import br.com.warnit.model.dto.LogradouroDTO;
 import br.com.warnit.repository.LogradouroRepository;
+import br.com.warnit.resource.exceptions.BairroService;
 import br.com.warnit.service.exceptions.DataIntegrityException;
 import br.com.warnit.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

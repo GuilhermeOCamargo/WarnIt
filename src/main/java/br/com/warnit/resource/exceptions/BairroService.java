@@ -1,4 +1,4 @@
-package br.com.warnit.service;
+package br.com.warnit.resource.exceptions;
 
 import br.com.warnit.model.domain.Bairro;
 import br.com.warnit.repository.BairroRepository;

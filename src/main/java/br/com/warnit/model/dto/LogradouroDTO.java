@@ -2,6 +2,9 @@ package br.com.warnit.model.dto;
 
 import br.com.warnit.model.domain.Logradouro;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -13,21 +16,30 @@ public class LogradouroDTO implements Serializable{
     private static final long serialVersionUID = 1L;
     /*Logradouro*/
     private Long idLogradouro;
+    @NotNull(message = "Insira o número do logradouro.")
     private String numero;
     private String complemento;
     /*Rua*/
     private Long idRua;
+    @NotNull(message = "Insira o nome da rua.")
     private String nomeRua;
+    @NotNull(message = "Insira do CEP.")
+    @Pattern(regexp = "\\d{5}-\\d{3}", message = "Cep inválido.")
     private String cep;
     /*Bairro*/
     private Long idBairro;
+    @NotNull(message = "Insira o bairro.")
     private String nomeBairro;
     /*Cidade*/
     private Long idCidade;
+    @NotNull(message = "Insira a cidade.")
     private String nomeCidade;
     /*Estado*/
     private Long idEstado;
+    @NotNull(message = "Insira o estado.")
     private String nomeEstado;
+    @NotNull(message = "Insira a UF.")
+    @Size(min = 2, max = 2, message = "UF Inválida.")
     private String uf;
     /*Usuario*/
     private Long usuarioId;

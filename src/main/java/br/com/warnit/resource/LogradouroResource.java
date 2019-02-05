@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 /**
@@ -30,7 +31,7 @@ public class LogradouroResource {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Void> insert(@RequestBody LogradouroDTO logradouroDTO){
+    public ResponseEntity<Void> insert(@Valid @RequestBody LogradouroDTO logradouroDTO){
         Logradouro logradouro = logradouroService.save(logradouroService.fromDto(logradouroDTO));
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(logradouro.getId()).toUri();

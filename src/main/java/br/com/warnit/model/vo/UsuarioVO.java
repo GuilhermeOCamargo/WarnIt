@@ -1,4 +1,4 @@
-package br.com.warnit.model.dto;
+package br.com.warnit.model.vo;
 
 import br.com.warnit.model.domain.Usuario;
 
@@ -9,19 +9,19 @@ import java.io.Serializable;
  * @since 03/02/2019
  * @version 1.0
  * */
-public class UsuarioRespDTO implements Serializable {
+public class UsuarioVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
     private String nome;
     private String email;
 
-    public UsuarioRespDTO(Long id, String nome, String email) {
+    public UsuarioVO(Long id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
     }
-    public UsuarioRespDTO(Usuario usuario){
+    public UsuarioVO(Usuario usuario){
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();

@@ -51,7 +51,7 @@ public class WarnItApplication implements CommandLineRunner {
 		/*Denuncia*/
 		Denuncia denuncia = DenunciaBuilder.create().get();
 		denuncia.setCategoria(categoriaDenuncia);
-		denuncia.setLocalidade(logradouro.getRua());
+		denuncia.setLocalidade(logradouro.getLocalidade());
 		denunciaRepository.save(denuncia);
 	}
 }

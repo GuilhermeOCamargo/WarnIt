@@ -21,7 +21,7 @@ public class LogradouroBuilder {
         builder.logradouro.setId(null);
         builder.logradouro.setNumero("1");
         builder.logradouro.setComplemento("Apto. 10, 2º Andar");
-        builder.logradouro.setRua(RuaBuilder.create().get());
+        builder.logradouro.setLocalidade(LocalidadeBuilder.create().get());
         return builder;
     }
 

@@ -27,7 +27,7 @@ public class Bairro implements Serializable{
 	private Cidade cidade;
 	@JsonBackReference
 	@OneToMany
-	private List<Rua> ruas = new ArrayList<>();
+	private List<Localidade> localidades = new ArrayList<>();
 	
 	public Bairro(Long id, String nome, Cidade cidade) {
 		this.id = id;

@@ -23,7 +23,7 @@ public class LogradouroService {
     @Autowired
     private LogradouroRepository logradouroRepository;
     @Autowired
-    private RuaService ruaService;
+    private LocalidadeService localidadeService;
     @Autowired
     private EstadoService estadoService;
     @Autowired
@@ -60,32 +60,32 @@ public class LogradouroService {
      * @return Logradouro
      * */
     public Logradouro fromDto(LogradouroDTO dto){
-        Rua rua = null;
+        Localidade localidade = null;
         Estado estado;
         Cidade cidade;
         Bairro bairro;
         Logradouro logradouro;
-        boolean isRuaPersisted = true;
+        boolean isLocalidadePersisted = true;
         try{
-            rua = ruaService.findByCep(dto.getCep());
+            localidade = localidadeService.findByCep(dto.getCep());
         }catch (ObjectNotFoundException e){
-            isRuaPersisted = false;
+            isLocalidadePersisted = false;
         }
-        if(!isRuaPersisted){
+        if(!isLocalidadePersisted){
             estado = estadoService.findOrPopulate(dto.getNomeEstado(), dto.getIdEstado(), dto.getUf());
             cidade = cidadeService.findOrPopulate(dto.getNomeCidade(), dto.getIdCidade());
             bairro = bairroService.findOrPopulate(dto.getNomeBairro(), dto.getIdBairro());
             cidade.setEstado(estado);
             bairro.setCidade(cidade);
-            rua = new Rua(dto.getIdRua(), dto.getNomeRua(), bairro, dto.getCep());
+            localidade = new Localidade(dto.getIdLocalidade(), dto.getNomeLocalidade(), bairro, dto.getCep());
         }
         if(dto.getIdLogradouro() != null){
             logradouro = findById(dto.getIdLogradouro());
-            logradouro.setRua(rua);
+            logradouro.setLocalidade(localidade);
             logradouro.setNumero(dto.getNumero());
             logradouro.setComplemento(dto.getComplemento());
         }else{
-            logradouro = new Logradouro(dto.getIdLogradouro(), rua, dto.getNumero(), dto.getComplemento());
+            logradouro = new Logradouro(dto.getIdLogradouro(), localidade, dto.getNumero(), dto.getComplemento());
             logradouro.setUsuario(usuarioService.findById(dto.getUsuarioId()));
             logradouro.getUsuario().setLogradouro(logradouro);
         }

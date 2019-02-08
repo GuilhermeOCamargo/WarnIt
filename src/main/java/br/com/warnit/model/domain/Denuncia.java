@@ -21,7 +21,7 @@ public class Denuncia implements Serializable {
     private Long id;
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)
-    private Rua localidade;
+    private Localidade localidade;
     @JsonManagedReference
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)
@@ -33,7 +33,7 @@ public class Denuncia implements Serializable {
     @Column(nullable = true, length = 255)
     private String filePath;
 
-    public Denuncia(Long id, Rua localidade, CategoriaDenuncia categoria, String detalhes, Calendar dataHora, String filePath) {
+    public Denuncia(Long id, Localidade localidade, CategoriaDenuncia categoria, String detalhes, Calendar dataHora, String filePath) {
         this.id = id;
         this.localidade = localidade;
         this.categoria = categoria;
@@ -69,11 +69,11 @@ public class Denuncia implements Serializable {
         this.id = id;
     }
 
-    public Rua getLocalidade() {
+    public Localidade getLocalidade() {
         return localidade;
     }
 
-    public void setLocalidade(Rua localidade) {
+    public void setLocalidade(Localidade localidade) {
         this.localidade = localidade;
     }
 

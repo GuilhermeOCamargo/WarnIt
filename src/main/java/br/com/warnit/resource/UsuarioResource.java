@@ -46,13 +46,13 @@ public class UsuarioResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDto){
+    public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody UsuarioDTO usuarioDto){
         Usuario usuario = usuarioService.fromDto(usuarioDto);
         usuario.setId(id);
         usuarioService.save(usuario);
         return ResponseEntity.noContent().build();
     }
-
+    //Todo change UsuarioDto to UsuarioPasswordDto
     @PutMapping(value = "/password/{id}")
     public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO){
         usuarioDTO.setId(id);

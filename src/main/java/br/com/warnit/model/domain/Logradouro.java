@@ -20,8 +20,8 @@ public class Logradouro implements Serializable{
 	private Long id;
 	@JsonManagedReference
 	@ManyToOne(optional=false, cascade= {CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "rua_id")
-	private Rua rua;
+	@JoinColumn(name = "localidade_id")
+	private Localidade localidade;
 	@Column(length = 10, nullable = false)
 	private String numero;
 	@Column(length = 25, nullable = true)
@@ -31,9 +31,9 @@ public class Logradouro implements Serializable{
 	@JoinColumn(nullable = false)
 	private Usuario usuario;
 	
-	public Logradouro(Long id, Rua rua, String numero, String complemento) {
+	public Logradouro(Long id, Localidade localidade, String numero, String complemento) {
 		this.id = id;
-		this.rua = rua;
+		this.localidade = localidade;
 		this.numero = numero;
 		this.complemento = complemento;
 	}
@@ -45,14 +45,14 @@ public class Logradouro implements Serializable{
 		if (o == null || getClass() != o.getClass()) return false;
 		Logradouro that = (Logradouro) o;
 		return id.equals(that.id) &&
-				rua.equals(that.rua) &&
+				localidade.equals(that.localidade) &&
 				numero.equals(that.numero) &&
 				complemento.equals(that.complemento);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, rua, numero, complemento);
+		return Objects.hash(id, localidade, numero, complemento);
 	}
 
 	//Getters And Setters
@@ -72,11 +72,11 @@ public class Logradouro implements Serializable{
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	public Rua getRua() {
-		return rua;
+	public Localidade getLocalidade() {
+		return localidade;
 	}
-	public void setRua(Rua rua) {
-		this.rua = rua;
+	public void setLocalidade(Localidade localidade) {
+		this.localidade = localidade;
 	}
 
     public Usuario getUsuario() {

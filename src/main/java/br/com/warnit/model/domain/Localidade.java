@@ -15,7 +15,7 @@ import java.util.Objects;
  * @version 1.0
  * */
 @Entity
-public class Rua implements Serializable {
+public class Localidade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,23 +32,23 @@ public class Rua implements Serializable {
     @OneToMany
     private List<Logradouro> logradouros = new ArrayList<>();
 
-    public Rua(Long id, String nomeRua, Bairro bairro, String cep) {
+    public Localidade(Long id, String nomeRua, Bairro bairro, String cep) {
         this.id = id;
         this.nomeRua = nomeRua;
         this.bairro = bairro;
         this.cep = cep;
     }
-    public Rua() {}
+    public Localidade() {}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Rua rua1 = (Rua) o;
-        return Objects.equals(id, rua1.id) &&
-                Objects.equals(nomeRua, rua1.nomeRua) &&
-                Objects.equals(bairro, rua1.bairro) &&
-                Objects.equals(cep, rua1.cep);
+        Localidade localidade1 = (Localidade) o;
+        return Objects.equals(id, localidade1.id) &&
+                Objects.equals(nomeRua, localidade1.nomeRua) &&
+                Objects.equals(bairro, localidade1.bairro) &&
+                Objects.equals(cep, localidade1.cep);
     }
 
     @Override

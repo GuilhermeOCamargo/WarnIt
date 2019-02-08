@@ -1,51 +1,37 @@
-package br.com.warnit.model.dto;
+package br.com.warnit.model.vo;
 
 import br.com.warnit.model.domain.Logradouro;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
  * @author Guilherme Camargo
- * @since 31/01/2019
+ * @since 06/02/2019
  * @version 1.0
  * */
-public class LogradouroDTO implements Serializable{
+public class LogradouroVO implements Serializable {
     private static final long serialVersionUID = 1L;
+
     /*Logradouro*/
     private Long idLogradouro;
-    @NotNull(message = "Insira o número do logradouro.")
     private String numero;
     private String complemento;
     /*Localidade*/
     private Long idLocalidade;
-    @NotNull(message = "Insira o nome da rua.")
     private String nomeLocalidade;
-    @NotNull(message = "Insira do CEP.")
-    @Pattern(regexp = "\\d{5}-\\d{3}", message = "Cep inválido.")
     private String cep;
     /*Bairro*/
     private Long idBairro;
-    @NotNull(message = "Insira o bairro.")
     private String nomeBairro;
     /*Cidade*/
     private Long idCidade;
-    @NotNull(message = "Insira a cidade.")
     private String nomeCidade;
     /*Estado*/
     private Long idEstado;
-    @NotNull(message = "Insira o estado.")
     private String nomeEstado;
-    @NotNull(message = "Insira a UF.")
-    @Size(min = 2, max = 2, message = "UF Inválida.")
     private String uf;
-    /*Usuario*/
-    private Long usuarioId;
-    public LogradouroDTO(Long idLogradouro, String numero, String complemento, Long idLocalidade, String nomeLocalidade,
-                         String cep, Long idBairro, String nomeBairro, Long idCidade, String nomeCidade,
-                         Long idEstado, String nomeEstado, String uf, Long usuarioId) {
+
+    public LogradouroVO(Logradouro log){
         this.idLogradouro = idLogradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -59,22 +45,6 @@ public class LogradouroDTO implements Serializable{
         this.idEstado = idEstado;
         this.nomeEstado = nomeEstado;
         this.uf = uf;
-        this.usuarioId = usuarioId;
-    }
-    public LogradouroDTO(Logradouro log){
-        this.idLogradouro = log.getId();
-        this.numero = log.getNumero();
-        this.complemento = this.getComplemento();
-        this.idLocalidade = log.getLocalidade().getId();
-        this.nomeLocalidade = log.getLocalidade().getNomeRua();
-        this.cep = log.getLocalidade().getCep();
-        this.idBairro = log.getLocalidade().getBairro().getId();
-        this.nomeBairro = log.getLocalidade().getBairro().getNome();
-        this.idCidade = log.getLocalidade().getBairro().getCidade().getId();
-        this.nomeCidade = log.getLocalidade().getBairro().getCidade().getNome();
-        this.idEstado = log.getLocalidade().getBairro().getCidade().getEstado().getId();
-        this.nomeEstado = log.getLocalidade().getBairro().getCidade().getEstado().getNomeEstado();
-        this.uf = log.getLocalidade().getBairro().getCidade().getEstado().getUf();
     }
 
     public Long getIdLogradouro() {
@@ -125,6 +95,14 @@ public class LogradouroDTO implements Serializable{
         this.cep = cep;
     }
 
+    public Long getIdBairro() {
+        return idBairro;
+    }
+
+    public void setIdBairro(Long idBairro) {
+        this.idBairro = idBairro;
+    }
+
     public String getNomeBairro() {
         return nomeBairro;
     }
@@ -133,12 +111,28 @@ public class LogradouroDTO implements Serializable{
         this.nomeBairro = nomeBairro;
     }
 
+    public Long getIdCidade() {
+        return idCidade;
+    }
+
+    public void setIdCidade(Long idCidade) {
+        this.idCidade = idCidade;
+    }
+
     public String getNomeCidade() {
         return nomeCidade;
     }
 
     public void setNomeCidade(String nomeCidade) {
         this.nomeCidade = nomeCidade;
+    }
+
+    public Long getIdEstado() {
+        return idEstado;
+    }
+
+    public void setIdEstado(Long idEstado) {
+        this.idEstado = idEstado;
     }
 
     public String getNomeEstado() {
@@ -155,37 +149,5 @@ public class LogradouroDTO implements Serializable{
 
     public void setUf(String uf) {
         this.uf = uf;
-    }
-
-    public Long getIdBairro() {
-        return idBairro;
-    }
-
-    public void setIdBairro(Long idBairro) {
-        this.idBairro = idBairro;
-    }
-
-    public Long getIdCidade() {
-        return idCidade;
-    }
-
-    public void setIdCidade(Long idCidade) {
-        this.idCidade = idCidade;
-    }
-
-    public Long getIdEstado() {
-        return idEstado;
-    }
-
-    public void setIdEstado(Long idEstado) {
-        this.idEstado = idEstado;
-    }
-
-    public Long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
     }
 }

@@ -2,6 +2,7 @@ package br.com.warnit.resource;
 
 import br.com.warnit.model.domain.Logradouro;
 import br.com.warnit.model.dto.LogradouroDTO;
+import br.com.warnit.model.vo.LogradouroVO;
 import br.com.warnit.service.LogradouroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,9 +26,9 @@ public class LogradouroResource {
     private LogradouroService logradouroService;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<LogradouroDTO> findById(@PathVariable Long id){
+    public ResponseEntity<LogradouroVO> findById(@PathVariable Long id){
         Logradouro logradouro = logradouroService.findById(id);
-        return ResponseEntity.ok(new LogradouroDTO(logradouro));
+        return ResponseEntity.ok(new LogradouroVO(logradouro));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -39,7 +40,7 @@ public class LogradouroResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody LogradouroDTO logradouroDTO){
+    public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody LogradouroDTO logradouroDTO){
         logradouroDTO.setIdLogradouro(id);
         Logradouro logradouro = logradouroService.fromDto(logradouroDTO);
         logradouroService.save(logradouro);

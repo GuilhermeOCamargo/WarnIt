@@ -1,6 +1,7 @@
 package br.com.warnit.controller;
 
 import br.com.warnit.model.domain.Usuario;
+import br.com.warnit.model.dto.LogradouroDTO;
 import br.com.warnit.model.dto.UsuarioDTO;
 import br.com.warnit.model.dto.UsuarioLoginDTO;
 import br.com.warnit.model.vo.UsuarioVO;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;

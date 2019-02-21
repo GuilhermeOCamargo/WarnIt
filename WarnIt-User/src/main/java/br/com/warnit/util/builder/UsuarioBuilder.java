@@ -20,7 +20,6 @@ public class UsuarioBuilder {
         builder.usuario.setNome("Guilherme Camargo");
         builder.usuario.setEmail("guilherme.ocamargo@gmail.com");
         builder.usuario.setSenha("1234");
-        builder.usuario.setLogradouro(1L);
         return builder;
     }
 

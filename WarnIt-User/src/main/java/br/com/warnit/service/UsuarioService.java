@@ -1,11 +1,14 @@
 package br.com.warnit.service;
 
+import br.com.warnit.model.domain.Logradouro;
 import br.com.warnit.model.domain.Usuario;
+import br.com.warnit.model.dto.LogradouroDTO;
 import br.com.warnit.model.dto.UsuarioDTO;
 import br.com.warnit.repository.UsuarioRepository;
 import br.com.warnit.service.exceptions.AuthenticationFailedException;
 import br.com.warnit.service.exceptions.DataIntegrityException;
 import br.com.warnit.service.exceptions.ObjectNotFoundException;
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,8 @@ import java.util.Optional;
 public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private LogradouroService logradouroService;
 
     public Usuario authenticate(String email, String senha){
         Optional<Usuario> usuario = usuarioRepository.findByEmailAndSenha(email, senha);
@@ -52,6 +57,15 @@ public class UsuarioService {
     public void updatePassword(UsuarioDTO dto){
         Usuario usuario = findById(dto.getId());
         usuario.setSenha(dto.getSenha());
+        save(usuario);
+    }
+
+    public void addLogradouro(LogradouroDTO logradouroDTO, Long usuarioId){
+        Logradouro logradouro = logradouroService.findOrPopulate(logradouroDTO);
+        Usuario usuario = findById(usuarioId);
+        logradouro.setUsuario(usuario);
+        logradouro = logradouroService.save(logradouro);
+        usuario.setLogradouro(logradouro);
         save(usuario);
     }
 

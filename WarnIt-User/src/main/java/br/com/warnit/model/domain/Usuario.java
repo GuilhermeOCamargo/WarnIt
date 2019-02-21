@@ -1,5 +1,6 @@
 package br.com.warnit.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -23,10 +24,13 @@ public class Usuario implements Serializable {
     private String email;
     @Column(length = 15, nullable = false)
     private String senha;
-    @Column(name = "logradouro_id")
-    private Long logradouro;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "logradouro_id")
+    @JsonIgnore
+    private Logradouro logradouro;
 
-    public Usuario(Long id, String nome, String email, String senha, Long logradouro) {
+    public Usuario(Long id, String nome, String email, String senha, Logradouro logradouro) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -83,11 +87,11 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public Long getLogradouro() {
+    public Logradouro getLogradouro() {
         return logradouro;
     }
 
-    public void setLogradouro(Long logradouro) {
+    public void setLogradouro(Logradouro logradouro) {
         this.logradouro = logradouro;
     }
 }

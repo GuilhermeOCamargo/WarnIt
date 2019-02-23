@@ -1,12 +1,12 @@
 package br.com.warnit.address.repository
 
+import br.com.warnit.address.model.Localidade
 import org.springframework.data.repository.CrudRepository
-import br.com.warnit.address.model.Estado
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 
-interface EstadoRepository: CrudRepository<Estado, Long>{
+interface LocalidadeRepository: CrudRepository<Localidade, Long>{
     @Transactional(readOnly = true)
-    fun findByNome(nome: String): Optional<Estado>
+    fun findByCep(cep: String): Optional<Localidade>
 }

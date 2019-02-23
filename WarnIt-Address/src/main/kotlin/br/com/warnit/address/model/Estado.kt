@@ -1,15 +1,14 @@
 package br.com.warnit.address.model
 
-import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import com.fasterxml.jackson.annotation.JsonBackReference
+import javax.persistence.*
 
-class Estado(@Id @GeneratedValue(strategy = GenerationType.IDENTITY)val id: Long = 0L,
+@Entity
+class Estado(@Id @GeneratedValue(strategy = GenerationType.IDENTITY)var id: Long? = null,
              @Column(length = 25, nullable = false)
-             val nome: String = "",
+             var nome: String? = null,
              @Column(length = 2, nullable = false)
-             val uf: String = ""){
-
-}
-
+             var uf: String? = null,
+             @JsonBackReference
+             @OneToMany
+             var cidades: List<Cidade> = emptyList())
